@@ -4,7 +4,7 @@
   "description": "backend using node js",
   "main": "demo.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev-server": "nodemon app.js"
   },
   "author": "Harshal Gore",
   "license": "ISC",
