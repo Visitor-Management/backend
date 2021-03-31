@@ -8,8 +8,6 @@ const validateEnv = require('./utils/validateEnv')
 const morgan = require('morgan')
 const { stream } = require('./utils/logger.js')
 
-const errorMiddleware = require('./middlewares/error.middleware')
-
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))

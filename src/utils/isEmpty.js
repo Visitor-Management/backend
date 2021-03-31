@@ -1,4 +1,4 @@
-export const isEmpty = (value) => {
+module.exports = (value) => {
   if (value === null) {
     return true;
   } else if (typeof value !== 'number' && value === '') {
