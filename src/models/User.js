@@ -1,9 +1,7 @@
 import { model, Schema, Document } from 'mongoose'
-import { User } from '../interfaces/users.interface'
-
 
 const userSchema = new Schema({
-    email: {
+    username: {
         type: String,
         required: true,
         unique: true,
@@ -12,13 +10,12 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    role: {
-        type: Roles,
-        default: Roles.BASIC,
+    usertype: {
+        type: String,
     },
-    userId: {
-        type: Number,
-        unique: true,
+    name: {
+        type: String,
+        required: true,
     },
 })
 

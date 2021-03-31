@@ -5,15 +5,28 @@ const { connect } = require('mongoose')
 const dbConnection = require('./database/MongoConnection')
 require('dotenv').config()
 const validateEnv = require('./utils/validateEnv')
+const morgan = require('morgan')
+const { stream } = require('./utils/logger.js')
+
+const errorMiddleware = require('./middlewares/error.middleware')
+
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors())
+app.options('*', cors());
+app.use(morgan('dev', { stream }))
 
-app.get("/", (req, res) => {
-    res.send('hii harshal')
-})
+// app.use(errorMiddleware())
+
+// app.get(baseUrl, (req, res) => {
+//     res.send('hii harshal')
+// })
+
+// Routes
+const authRoute = require('./routes/auth.routes')
+app.use(authRoute)
 
 validateEnv()
 // Connect to MongoDB Database
