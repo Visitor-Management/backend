@@ -2,7 +2,7 @@
   "name": "node",
   "version": "1.0.0",
   "description": "backend using node js",
-  "main": "demo.js",
+  "main": "app.js",
   "scripts": {
     "dev-server": "nodemon app.js"
   },
