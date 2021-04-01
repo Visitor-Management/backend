@@ -43,12 +43,12 @@ router.post(`/product/login`, async (req, res) => {
         if (!isPasswordMatching)
             throw new Error("You're password not matching")
 
-        const tokenData = createToken(findUser)
-        const cookie = createCookie(tokenData)
+        const token = createToken(findUser)
+        // const cookie = createCookie(tokenData)
 
-        res.setHeader('Set-Cookie', [cookie])
+        // res.setHeader('Set-Cookie', [cookie])
 
-        res.status(200).json({ data: findUser, message: 'login' })
+        res.status(200).json({ ...token })
     } catch (error) {
         next(error)
     }
