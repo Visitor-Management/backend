@@ -13,7 +13,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors())
-app.options('*', cors());
+// app.options('*', cors())
 app.use(morgan('dev', { stream }))
 
 // app.use(errorMiddleware())
@@ -25,16 +25,18 @@ app.use(morgan('dev', { stream }))
 // Routes
 const authRoute = require('./routes/auth.routes')
 app.use(authRoute)
+const visitorRoute = require('./routes/visitor.routes')
+app.use(visitorRoute)
 
 validateEnv()
 // Connect to MongoDB Database
 connect(dbConnection.url, dbConnection.options)
-    .then(() => {
-        console.log('🟢 The database is connected.')
-    })
-    .catch((error) => {
-        console.log(`🔴 Unable to connect to the database: ${error}.`)
-    })
+  .then(() => {
+    console.log('🟢 The database is connected.')
+  })
+  .catch(error => {
+    console.log(`🔴 Unable to connect to the database: ${error}.`)
+  })
 
 const PORT = process.env.PORT || 8000
 
