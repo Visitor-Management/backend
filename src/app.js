@@ -27,6 +27,9 @@ const authRoute = require('./routes/auth.routes')
 app.use(authRoute)
 const visitorRoute = require('./routes/visitor.routes')
 app.use(visitorRoute)
+const inviteRoute = require('./routes/invite.routes')
+app.use(inviteRoute)
+app.use(require('./routes/stats.routes'))
 
 validateEnv()
 // Connect to MongoDB Database

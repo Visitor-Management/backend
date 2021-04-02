@@ -17,14 +17,19 @@ const imageUploads = upload.fields(fields)
 // Check In (Create Visitor)
 router.post(
   '/product/reception/user/checkin',
-  //   authMiddleware,
+  authMiddleware,
   imageUploads,
   visitorController.checkIn,
 )
 router.get(
   '/product/reception/checkin/user/data',
-  //   authMiddleware,
+  authMiddleware,
   visitorController.getVisitors,
+)
+router.post(
+  '/product/reception/user/checkout',
+  authMiddleware,
+  visitorController.checkOut,
 )
 
 module.exports = router

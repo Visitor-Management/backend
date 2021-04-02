@@ -8,13 +8,13 @@ const inviteController = require('../controllers/invite.controller')
 // Check In (Create Invite)
 router.post(
   '/product/reception/user/invite',
-  authMiddleware,
-  imageUploads,
-  inviteController.checkIn,
+  // authMiddleware,
+  // imageUploads,
+  inviteController.invite,
 )
 router.get(
   '/product/reception/invite/user/data',
-  authMiddleware,
+  // authMiddleware,
   inviteController.getInvites,
 )
 
