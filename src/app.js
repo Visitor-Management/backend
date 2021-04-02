@@ -30,6 +30,8 @@ app.use(visitorRoute)
 const inviteRoute = require('./routes/invite.routes')
 app.use(inviteRoute)
 app.use(require('./routes/stats.routes'))
+app.use(require('./routes/sites.routes'))
+app.use(require('./routes/device.routes'))
 
 validateEnv()
 // Connect to MongoDB Database
