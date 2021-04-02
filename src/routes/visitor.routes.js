@@ -31,5 +31,10 @@ router.post(
   authMiddleware,
   visitorController.checkOut,
 )
+router.get(
+  '/product/reception/meeting/purpose/data',
+  authMiddleware,
+  visitorController.getPurpose,
+)
 
 module.exports = router
