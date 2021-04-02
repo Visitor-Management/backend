@@ -58,6 +58,12 @@ const visitorSchema = new Schema({
   checkedOutBy: {
     type: String,
   },
+  intime: {
+    type: String,
+  },
+  outime: {
+    type: String,
+  },
 })
 
 const visitorModel = model('Visitor', visitorSchema)

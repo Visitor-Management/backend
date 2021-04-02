@@ -1,4 +1,5 @@
 const inviteModel = require('../models/invite.model')
+const isEmpty = require('../utils/isEmpty')
 
 module.exports = {
   invite: (req, res, next) => {
@@ -13,9 +14,13 @@ module.exports = {
       const p = parseInt(page)
       const c = parseInt(count)
       const skip = p * c
-      return data
+      let ans = data
         .slice(skip, skip + c)
         .filter(el => el.name.toLowerCase().startsWith(visitor.toLowerCase()))
+      if (!isEmpty(purpose)) {
+        ans = ans.filter(el => el.purpose === purpose)
+      }
+      return ans
     }
     const filteredData = filter(data)
     res.send({
