@@ -7,7 +7,7 @@ const siteSchema = new Schema({
     address: {
         type: String,
     },
-    checkinpointt: {
+    checkinpoint: {
         type: String,
     },
 })

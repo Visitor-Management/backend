@@ -7,7 +7,7 @@ module.exports = {
     return res.send(createdSite)
   },
   getSites: async (req, res, next) => {
-    const { page, count, visitor, purpose, site } = req.query
+    const { page, count, site } = req.query
     const data = await siteModel.find({}).sort({ _id: -1 })
     const filter = data => {
       const p = parseInt(page)
@@ -15,12 +15,11 @@ module.exports = {
       const skip = p * c
       return data
         .slice(skip, skip + c)
-        .filter(el => el.name.toLowerCase().startsWith(visitor.toLowerCase()))
     }
     const filteredData = filter(data)
     res.send({
       totalCount: data.length,
-      data: data,
+      data: filteredData,
     })
   },
 }

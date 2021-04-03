@@ -32,6 +32,8 @@ app.use(inviteRoute)
 app.use(require('./routes/stats.routes'))
 app.use(require('./routes/sites.routes'))
 app.use(require('./routes/device.routes'))
+app.use(require('./routes/employee.routes'))
+app.use(require('./routes/checkInPoint.routes'))
 
 validateEnv()
 // Connect to MongoDB Database

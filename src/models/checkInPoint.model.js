@@ -1,13 +1,13 @@
 const { model, Schema, Document } = require('mongoose')
 
 const checkInPointSchema = new Schema({
-    checkInPointname: {
+    checkinpoint: {
         type: String,
     },
     device: {
         type: String,
     },
-    checkinpointt: {
+    sitename: {
         type: String,
     },
 })
