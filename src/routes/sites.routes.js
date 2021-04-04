@@ -8,14 +8,10 @@ const siteController = require('../controllers/site.controller')
 // Check In (Create Site)
 router.post(
   '/product/register/site',
-  // authMiddleware,
+  authMiddleware,
   // imageUploads,
   siteController.site,
 )
-router.get(
-  '/product/site/data',
-  // authMiddleware,
-  siteController.getSites,
-)
+router.get('/product/site/data', authMiddleware, siteController.getSites)
 
 module.exports = router

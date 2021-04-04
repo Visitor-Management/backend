@@ -2,15 +2,13 @@ const mongoose = require('mongoose')
 const { model, Schema, Document } = mongoose
 
 const visitorSchema = new Schema({
-  profilepic: {
-    type: String,
-    // required: true,
-    // unique: true,
-  },
-  idcard: {
+  profilePicPath: {
     type: String,
   },
-  signature: {
+  idCardImagePath: {
+    type: String,
+  },
+  signaturePath: {
     type: String,
   },
   name: {
@@ -46,7 +44,7 @@ const visitorSchema = new Schema({
   site: {
     type: String,
   },
-  vehicleNo: {
+  vehicleno: {
     type: String,
   },
   belongings: {
@@ -55,7 +53,7 @@ const visitorSchema = new Schema({
   idtype: {
     type: String,
   },
-  checkedOutBy: {
+  checkOutBy: {
     type: String,
   },
   intime: {

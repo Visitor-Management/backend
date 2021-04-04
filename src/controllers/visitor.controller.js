@@ -5,10 +5,12 @@ const isEmpty = require('../utils/isEmpty')
 module.exports = {
   checkIn: (req, res, next) => {
     const visitor = req.body
-    visitor.profilepic =
-      req.files['profilepic'] && req.files['profilepic'][0].path
-    visitor.idcard = req.files['idcard'] && req.files['idcard'][0].path
-    visitor.signature = req.files['signature'] && req.files['signature'][0].path
+    visitor.profilePicPath =
+      req.files['profilepic'] && req.files['profilepic'][0].filename
+    visitor.idCardImagePath =
+      req.files['idcard'] && req.files['idcard'][0].filename
+    visitor.signaturePath =
+      req.files['signature'] && req.files['signature'][0].filename
     console.log(visitor)
     const createdVisitor = visitorModel.create(visitor)
     return res.send(createdVisitor)
@@ -20,9 +22,13 @@ module.exports = {
       const p = parseInt(page)
       const c = parseInt(count)
       const skip = p * c
-      let ans = data
-        .slice(skip, skip + c)
-        .filter(el => el.name.toLowerCase().startsWith(visitor.toLowerCase()))
+      let ans = data.slice(skip, skip + c)
+
+      if (!isEmpty(visitor)) {
+        ans = ans.filter(el =>
+          el.name.toLowerCase().startsWith(visitor.toLowerCase()),
+        )
+      }
       if (!isEmpty(purpose)) {
         ans = ans.filter(el => el.purpose === purpose)
       }
@@ -34,10 +40,11 @@ module.exports = {
       data: filteredData,
     })
   },
-  checkOut: (req, res, next) => {
+  checkOut: async (req, res, next) => {
     const { checkin_id, user } = req.body
-    const update = { checkOutBy: user }
-    visitorModel.findByIdAndUpdate(checkin_id, update)
+    const update = { checkOutBy: user, outime: new Date().toISOString() }
+
+    await visitorModel.findByIdAndUpdate(checkin_id, update)
     res.send({ checkOut: 'Success' })
   },
   getPurpose: async (req, res, next) => {

@@ -1,19 +1,21 @@
-const fs = require('fs');
-const winston = require('winston');
-const winstonDaily = require('winston-daily-rotate-file');
+const fs = require('fs')
+const winston = require('winston')
+const winstonDaily = require('winston-daily-rotate-file')
 
 // logs dir
-const logDir = __dirname + '/../logs';
+const logDir = __dirname + '/../logs'
 
 if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
+  fs.mkdirSync(logDir)
 }
 
 // winston format
-const { combine, timestamp, printf } = winston.format;
+const { combine, timestamp, printf } = winston.format
 
 // Define log format
-const logFormat = printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
+const logFormat = printf(
+  ({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`,
+)
 
 /*
  * Log Level
@@ -49,18 +51,22 @@ const logger = winston.createLogger({
       zippedArchive: true,
     }),
   ],
-});
+})
 
 logger.add(
   new winston.transports.Console({
-    format: winston.format.combine(winston.format.splat(), winston.format.colorize(), winston.format.simple()),
+    format: winston.format.combine(
+      winston.format.splat(),
+      winston.format.colorize(),
+      winston.format.simple(),
+    ),
   }),
-);
+)
 
 const stream = {
-  write: (message) => {
-    logger.info(message.substring(0, message.lastIndexOf('\n')));
+  write: message => {
+    logger.info(message.substring(0, message.lastIndexOf('\n')))
   },
-};
+}
 
-module.exports = { logger, stream };
+module.exports = { logger, stream }

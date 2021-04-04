@@ -8,13 +8,13 @@ const checkInPointController = require('../controllers/checkInPoint.controller')
 // Check In (Create CheckInPoint)
 router.post(
   '/product/register/checkinpoint',
-  // authMiddleware,
+  authMiddleware,
   // imageUploads,
   checkInPointController.checkInPoint,
 )
 router.get(
   '/product/checkinpoint/data',
-  // authMiddleware,
+  authMiddleware,
   checkInPointController.getCheckInPoints,
 )
 

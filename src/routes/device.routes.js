@@ -8,14 +8,10 @@ const deviceController = require('../controllers/device.controller')
 // Check In (Create Device)
 router.post(
   '/product/acountDetail/device/register',
-  // authMiddleware,
+  authMiddleware,
   // imageUploads,
   deviceController.device,
 )
-router.get(
-  '/product/device/data',
-  // authMiddleware,
-  deviceController.getDevices,
-)
+router.get('/product/device/data', authMiddleware, deviceController.getDevices)
 
 module.exports = router

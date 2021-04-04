@@ -14,17 +14,14 @@ router.get(`/product/stats/data`, authMiddleware, async (req, res, next) => {
     new Date(subDays(new Date(), 3).setUTCHours(0, 0, 0, 0)).toISOString(),
     new Date(subDays(new Date(), 4).setUTCHours(0, 0, 0, 0)).toISOString(),
   ]
-  console.log(days.join('\n'))
   const visitorsByDay = []
   days.map(async (element, i) => {
-    const docs = await visitorModel.countDocuments({
+    visitorsByDay[i] = await visitorModel.countDocuments({
       intime: {
         $gte: element,
         $lt: addDays(new Date(element), 1).toISOString(),
       },
     })
-    visitorsByDay[i] = docs
-    console.log(element, '   ', addDays(new Date(element), 1))
   })
   const data = {}
   data.in_office = 0

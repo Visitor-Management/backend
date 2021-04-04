@@ -1,16 +1,23 @@
 const { model, Schema, Document } = require('mongoose')
 
-const siteSchema = new Schema({
+const siteSchema = new Schema(
+  {
     sitename: {
-        type: String,
+      type: String,
     },
     address: {
-        type: String,
+      type: String,
     },
     checkinpoint: {
-        type: String,
+      type: String,
     },
-})
+  },
+  {
+    timestamps: { createdAt: 'createdOn', updatedAt: 'updatedOn' },
+  },
+)
+
+siteSchema.set('timestamps', true)
 
 const siteModel = model('Site', siteSchema)
 

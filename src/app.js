@@ -7,6 +7,7 @@ require('dotenv').config()
 const validateEnv = require('./utils/validateEnv')
 const morgan = require('morgan')
 const { stream } = require('./utils/logger.js')
+const path = require('path')
 
 const app = express()
 
@@ -18,9 +19,9 @@ app.use(morgan('dev', { stream }))
 
 // app.use(errorMiddleware())
 
-// app.get(baseUrl, (req, res) => {
-//     res.send('hii harshal')
-// })
+app.get('/:path', (req, res) => {
+  res.sendFile(path.join(__dirname, '../uploads', req.params.path))
+})
 
 // Routes
 const authRoute = require('./routes/auth.routes')
