@@ -1,16 +1,44 @@
 const inviteModel = require('../models/invite.model')
 const visitorModel = require('../models/visitor.model')
 const isEmpty = require('../utils/isEmpty')
+const uuid = require('uuid')
+
+const uploadImageToStorage = require('../middlewares/imageUpload.middleware').uploadImageToStorage
+
+const uploadVisitorImage = async (file) => {
+  try {
+    if (file) {
+      const id = uuid.v4()
+      const imageUploadResponse = await uploadImageToStorage(
+        file,
+        id,
+      )
+
+      if (imageUploadResponse) return imageUploadResponse
+    } else {
+
+      return null
+    }
+  } catch (error) {
+
+    return null
+  }
+}
 
 module.exports = {
-  checkIn: (req, res, next) => {
+  checkIn: async (req, res, next) => {
     const visitor = req.body
+    const files = req.files
+    const profilePicUploadResult = files['profilepic'] && await uploadVisitorImage(files['profilepic'][0])
+    const idPicUploadResult = files['idcard'] && await uploadVisitorImage(files['idcard'][0])
+    const signPicUploadResult = files['signature'] && await uploadVisitorImage(files['signature'][0])
+
     visitor.profilePicPath =
-      req.files['profilepic'] && req.files['profilepic'][0].filename
+      profilePicUploadResult && profilePicUploadResult.url
     visitor.idCardImagePath =
-      req.files['idcard'] && req.files['idcard'][0].filename
+      idPicUploadResult && idPicUploadResult.url
     visitor.signaturePath =
-      req.files['signature'] && req.files['signature'][0].filename
+      signPicUploadResult && signPicUploadResult.url
     console.log(visitor)
     const createdVisitor = visitorModel.create(visitor)
     return res.send(createdVisitor)

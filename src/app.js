@@ -8,6 +8,8 @@ const validateEnv = require('./utils/validateEnv')
 const morgan = require('morgan')
 const { stream } = require('./utils/logger.js')
 const path = require('path')
+const { visitorImageBucket } = require('./database/firebase')
+
 
 const app = express()
 
@@ -21,6 +23,13 @@ app.use(morgan('dev', { stream }))
 
 app.get('/:path', (req, res) => {
   res.sendFile(path.join(__dirname, '../uploads', req.params.path))
+})
+
+
+app.get('/', async (req, res) => {
+  const files = await visitorImageBucket.getFiles()
+  console.log(files)
+  res.send('Hello')
 })
 
 // Routes

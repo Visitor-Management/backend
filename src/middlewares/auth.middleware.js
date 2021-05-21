@@ -5,7 +5,7 @@ const authMiddleware = async (req, res, next) => {
   try {
     // const cookies = req.cookies
     const headers = req.headers
-    const token = req.query.token
+    const token = req.headers.authorization.split(' ')[1]
     if (token) {
       const secret = process.env.JWT_SECRET
       const verificationResponse = jwt.verify(token, secret)

@@ -8,6 +8,7 @@ const multer = require('multer')
 const crypto = require('crypto')
 const mime = require('mime')
 const path = require('path')
+const imageUploadMiddleware = require('../middlewares/imageUpload.middleware').imageUploadMiddleWare
 
 const storage = multer.diskStorage({
   destination: path.join('uploads/'),
@@ -33,7 +34,8 @@ const fields = [
   { name: 'idcard', maxCount: 1 },
   { name: 'signature', maxCount: 1 },
 ]
-const imageUploads = upload.fields(fields)
+// const imageUploads = upload.fields(fields)
+const imageUploads = imageUploadMiddleware(fields)
 
 // Check In (Create Visitor)
 router.post(
