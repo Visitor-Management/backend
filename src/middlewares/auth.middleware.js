@@ -16,13 +16,13 @@ const authMiddleware = async (req, res, next) => {
         req.user = findUser
         next()
       } else {
-        next(new Error('Wrong authentication token'))
+        next('Wrong authentication token')
       }
     } else {
-      next(new Error('Authentication token missing'))
+      next('Authentication token missing')
     }
   } catch (error) {
-    next(new Error('Wrong authentication token'))
+    next('Wrong authentication token')
   }
 }
 
