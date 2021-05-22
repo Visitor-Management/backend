@@ -14,11 +14,15 @@ const userSchema = new Schema({
     usertype: {
         type: String,
     },
+    status: {
+        type: String,
+    },
     name: {
         type: String,
         required: true,
     },
-})
+
+}, { timestamps: true, })
 
 const userModel = model('User', userSchema)
 
