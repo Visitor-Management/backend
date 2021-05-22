@@ -57,4 +57,11 @@ router.post(`/product/login`, async (req, res, next) => {
   }
 })
 
+router.get('/product/accountDetail/data', authMiddleware, async (req, res) => {
+  const data = await UserModel.find({})
+  res.send({
+    data
+  })
+})
+
 module.exports = router
